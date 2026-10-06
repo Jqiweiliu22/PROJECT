@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="740" viewBox="0 0 1180 740" role="img" aria-labelledby="title desc">
+  <title id="title">Collection Explorer 本地应用架构</title>
+  <desc id="desc">浏览器请求 app.py 的 HTTP API，app.py 调用 collection_core.py 计算搜索与统计。JSON 快照只在启动时读取。浏览器直接加载 NMA 与 SLWA 远程图片；应用不依赖实时外部 API。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#796858"/>
+    </marker>
+    <style>
+      text{font-family:Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif;fill:#28231f}
+      .title{font-size:30px;font-weight:700}.subtitle{font-size:16px;fill:#665d54}
+      .label{font-size:20px;font-weight:700}.small{font-size:15px;fill:#665d54}
+      .body{font-size:16px}.tag{font-size:13px;letter-spacing:1px;fill:#9b3c32}
+      .box{fill:#fffdf8;stroke:#d7cdbc;stroke-width:1.5}.flow{fill:none;stroke:#796858;stroke-width:2;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1180" height="740" fill="#f4f0e7"/>
+  <text x="56" y="55" class="title">观藏 · Collection Explorer</text>
+  <text x="56" y="87" class="subtitle">已实现架构 / 本地 Python 服务与浏览器界面</text>
+  <line x1="56" y1="110" x2="1124" y2="110" stroke="#d7cdbc"/>
+
+  <rect x="56" y="140" width="300" height="245" rx="12" class="box"/>
+  <text x="80" y="174" class="tag">01 / BROWSER</text>
+  <text x="80" y="209" class="label">浏览器界面</text>
+  <text x="80" y="242" class="body">index.html · styles.css · script.js</text>
+  <text x="80" y="278" class="body">图片展廊 / 完整目录表格</text>
+  <text x="80" y="307" class="body">详情与放大 / 统计 / 来源</text>
+  <text x="80" y="349" class="small">收集条件，绘制返回的结果</text>
+
+  <rect x="440" y="140" width="310" height="245" rx="12" class="box"/>
+  <text x="464" y="174" class="tag">02 / LOCAL HTTP</text>
+  <text x="464" y="209" class="label">app.py</text>
+  <text x="464" y="242" class="body">127.0.0.1:8000</text>
+  <text x="464" y="278" class="body">/api/collections · /api/meta</text>
+  <text x="464" y="307" class="body">/api/objects/{id}</text>
+  <text x="464" y="349" class="small">静态白名单 / 内存记录 / 错误响应</text>
+
+  <rect x="834" y="140" width="290" height="245" rx="12" class="box"/>
+  <text x="858" y="174" class="tag">03 / PYTHON CORE</text>
+  <text x="858" y="209" class="label">collection_core.py</text>
+  <text x="858" y="242" class="body">load_dataset() · query_records()</text>
+  <text x="858" y="278" class="body">验证 / AND 匹配 / 字段加权</text>
+  <text x="858" y="307" class="body">模式筛选 / 排序 / 统计 / 分页</text>
+  <text x="858" y="349" class="small">先统计全部匹配，再取当前页</text>
+
+  <path d="M356 222H436" class="flow"/>
+  <text x="396" y="209" text-anchor="middle" class="small">HTTP</text>
+  <path d="M440 293H360" class="flow"/>
+  <text x="398" y="324" text-anchor="middle" class="small">JSON 等</text>
+  <path d="M750 222H830" class="flow"/>
+  <text x="792" y="209" text-anchor="middle" class="small">函数调用</text>
+  <path d="M834 293H754" class="flow"/>
+  <text x="792" y="324" text-anchor="middle" class="small">数据结果</text>
+
+  <rect x="56" y="505" width="300" height="145" rx="12" class="box"/>
+  <text x="80" y="537" class="tag">EXTERNAL / HTTPS</text>
+  <text x="80" y="571" class="label">NMA / SLWA 远程图片与来源</text>
+  <text x="80" y="603" class="body">逐件图像 URL、许可与署名</text>
+  <text x="80" y="630" class="small">不复制到项目或 Python 服务器</text>
+  <path d="M176 385V501" class="flow"/>
+  <path d="M232 505V389" class="flow"/>
+  <rect x="60" y="429" width="295" height="30" fill="#f4f0e7"/>
+  <text x="207" y="450" text-anchor="middle" class="body">浏览器直接请求 / 图片响应</text>
+
+  <rect x="834" y="505" width="290" height="145" rx="12" class="box"/>
+  <text x="858" y="537" class="tag">LOCAL SNAPSHOT / JSON</text>
+  <text x="858" y="571" class="label">data/collections.json</text>
+  <text x="858" y="603" class="body">712 条目录 / 316 条含图片链接</text>
+  <text x="858" y="630" class="small">元数据、原始字段、日期和许可</text>
+  <path d="M979 505V389" class="flow"/>
+  <rect x="886" y="429" width="187" height="30" fill="#f4f0e7"/>
+  <text x="979" y="450" text-anchor="middle" class="body">仅在启动时读取</text>
+
+  <text x="456" y="514" class="tag">RUNTIME BOUNDARY</text>
+  <text x="456" y="548" class="body">启动后使用内存中的快照。</text>
+  <text x="456" y="578" class="body">修改数据需重启本地服务。</text>
+  <text x="456" y="608" class="small">未实现公开生产托管。</text>
+  <line x1="56" y1="683" x2="1124" y2="683" stroke="#d7cdbc"/>
+  <text x="56" y="716" class="subtitle">目录检索不依赖实时外部 API；远程图片与馆方原始记录需要联网。更新：2026-10-05</text>
+</svg>
